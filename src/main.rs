@@ -14,4 +14,5 @@ fn main() {
     // run(lib::test5, "input3.txt", 5);
     // run(lib::test6, "input3.txt", 6);
     // run(day4::test7, "input4.txt", 7);
+    // run(day4::test8, "input4.txt", 8);
 }
