@@ -1,7 +1,7 @@
 use std::env;
 use std::fs;
 
-pub fn test1(filename: &str) -> i32 {
+pub fn test1(filename: &str) -> u32 {
     println!("In file {}", filename);
 
     let contents = fs::read_to_string(filename)
@@ -19,7 +19,7 @@ pub fn test1(filename: &str) -> i32 {
     return counter - 1;
 }
 
-pub fn test2(filename: &str) -> i32 {
+pub fn test2(filename: &str) -> u32 {
     println!("In file {}", filename);
 
     let contents = fs::read_to_string(filename)
@@ -47,19 +47,19 @@ pub fn test2(filename: &str) -> i32 {
     return counter;
 }
 
-pub fn test3(filename: &str) -> i32 {
+pub fn test3(filename: &str) -> u32 {
     println!("In file {}", filename);
 
     let contents = fs::read_to_string(filename)
         .expect("Something went wrong reading the file");
 
-    let mut horizonal = 0;
-    let mut vertical = 0;
+    let mut horizonal: u32 = 0;
+    let mut vertical: u32 = 0;
 
     for line in contents.split('\n') {
         let pair: Vec<&str> = line.split(' ').collect();
         let command = pair[0];
-        let arg = pair[1].parse::<i32>().unwrap();
+        let arg = pair[1].parse::<u32>().unwrap();
 
         match command {
             "forward" => {
@@ -79,20 +79,20 @@ pub fn test3(filename: &str) -> i32 {
     return horizonal * vertical;
 }
 
-pub fn test4(filename: &str) -> i32 {
+pub fn test4(filename: &str) -> u32 {
     println!("In file {}", filename);
 
     let contents = fs::read_to_string(filename)
         .expect("Something went wrong reading the file");
 
-    let mut horizonal = 0;
-    let mut vertical = 0;
+    let mut horizonal: u32 = 0;
+    let mut vertical: u32 = 0;
     let mut aim = 0;
 
     for line in contents.split('\n') {
         let pair: Vec<&str> = line.split(' ').collect();
         let command = pair[0];
-        let arg = pair[1].parse::<i32>().unwrap();
+        let arg = pair[1].parse::<u32>().unwrap();
 
         match command {
             "forward" => {
@@ -150,30 +150,30 @@ pub fn test5(filename: &str) -> u32 {
 const TEST_6_TOTAL_LINES: usize = 1000;
 const TEST_6_BIT_COUNT: usize = 12;
 
-fn test6_find_rating(mut candidates: Vec<u32>, is_msb: bool) -> u32 {
+fn test6_find_rating(mut candidates: Vec<u32>, is_most_common: bool) -> u32 {
     for b in 0..TEST_6_BIT_COUNT {
-        let mut mcb = 0;
+        let mut bit = 0; // most common or less common bit
         let mut one_count = 0;
-        let s = TEST_6_BIT_COUNT - b - 1;
+        let shift = TEST_6_BIT_COUNT - b - 1;
         for c in &candidates {
-            one_count += (*c >> s) & 1;
+            one_count += (*c >> shift) & 1;
         }
 
         if one_count >= candidates.len() as u32 - one_count  {
-            mcb = 1;
+            bit = 1;
         } else {
-            mcb = 0;
+            bit = 0;
         }
-        if !is_msb {
-            mcb = !mcb;
+        if !is_most_common {
+            bit = bit ^ 1;
         }
 
         candidates.retain(|c| {
-            let b_bit = (c >> s) & 1;
-            println!("c - {:b}, b_bit - {:b}, mcb - {}, total: {}", c, b_bit, mcb, b_bit == mcb);
-            b_bit == mcb
+            let b_bit = (c >> shift) & 1;
+            // println!("c - {:b}, b_bit - {:b}, mcb - {}, total: {}", c, b_bit, bit, b_bit == bit);
+            b_bit == bit
         });
-        println!("Left: {}", candidates.len());
+        // println!("Left: {}", candidates.len());
         if candidates.len() == 1 {
             return candidates[0];
         }

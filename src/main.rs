@@ -1,25 +1,17 @@
 mod lib;
 mod day4;
 
+fn run(f: fn(&str) -> u32, filename: &str, number: u32) {
+    let answer = f(filename);
+    println!("Test {} Answer is: {}", number, answer)
+}
+
 fn main() {
-    // let answer1 = lib::test1("input1.txt");
-    // println!("Test 1 Answer is: {}", answer1)
-
-    // let answer2 = lib::test2("input1.txt");
-    // println!("Test 2 Answer is: {}", answer1)
-
-    // let answer3 = lib::test3("input2.txt");
-    // println!("Test 3 Answer is: {}", answer3)
-
-    // let answer4 = lib::test4("input2.txt");
-    // println!("Test 4 Answer is: {}", answer4)
-
-    // let answer5 = lib::test5("input3.txt");
-    // println!("Test 5 Answer is: {}", answer5);
-
-    // let answer6 = lib::test6("input3.txt");
-    // println!("Test 6 Answer is: {}", answer6);
-
-    let answer6 = lib::test6("input3.txt");
-    println!("Test 6 Answer is: {}", answer6);
+    // run(lib::test1, "input1.txt", 1);
+    // run(lib::test2, "input1.txt", 2);
+    // run(lib::test3, "input2.txt", 3);
+    // run(lib::test4, "input2.txt", 4);
+    // run(lib::test5, "input3.txt", 5);
+    // run(lib::test6, "input3.txt", 6);
+    // run(day4::test7, "input4.txt", 7);
 }
